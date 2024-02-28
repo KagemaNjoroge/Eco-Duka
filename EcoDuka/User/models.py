@@ -15,6 +15,13 @@ class Location(models.Model):
         verbose_name = "Location"
         verbose_name_plural = "Locations"
 
+    def to_json(self):
+        return {
+            "county": self.county,
+            "sub_county": self.sub_county,
+            "ward": self.ward,
+        }
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -86,6 +93,18 @@ class CustomUser(AbstractBaseUser):
         "Is the user a member of staff"
         return self.is_admin
 
+    def to_json(self):
+        return {
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "phone_number": self.phone_number,
+            "profile_photo": self.profile_photo,
+            "national_id": self.national_id,
+            "user_type": self.user_type,
+            "location": self.location.to_json(),
+        }
+
 
 class Notification(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -99,3 +118,14 @@ class Notification(models.Model):
     class Meta:
         verbose_name = "Notification"
         verbose_name_plural = "Notifications"
+
+    def to_json(self):
+        return {
+            # return the user's email if no national id
+            "user": (
+                self.user.email if not self.user.national_id else self.user.national_id
+            ),
+            "content": self.content,
+            "read": self.read,
+            "date": self.date,
+        }
