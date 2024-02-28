@@ -1,6 +1,6 @@
 from django.urls import path
 
-from EcoDuka.Product.views import ProductView
+from .views import ProductView
 
 urlpatterns = [
     path("product/", ProductView.as_view(), name="product"),
