@@ -98,3 +98,69 @@ class ProductView(View):
             safe=False,
             status=201,
         )
+
+
+class CategoryView(View):
+    def get(self, request: HttpRequest, id: int = None) -> JsonResponse:
+        if id:
+            category = get_object_or_404(Category, id=id)
+            return JsonResponse(
+                {
+                    "id": category.id,
+                    "name": category.name,
+                    "description": category.description,
+                },
+                safe=False,
+                status=200,
+            )
+        else:
+            categories = Category.objects.all()
+            return JsonResponse(
+                [
+                    {
+                        "id": category.id,
+                        "name": category.name,
+                        "description": category.description,
+                    }
+                    for category in categories
+                ],
+                safe=False,
+                status=200,
+            )
+
+    def post(self, request: HttpRequest) -> JsonResponse:
+        data = request.body
+        data = json.loads(data)
+        category = Category(**data)
+        category.save()
+        return JsonResponse(
+            {
+                "id": category.id,
+                "name": category.name,
+                "description": category.description,
+            },
+            safe=False,
+            status=201,
+        )
+
+    def put(self, request: HttpRequest, id: int) -> JsonResponse:
+        data = request.body
+        data = json.loads(data)
+        category = get_object_or_404(Category, id=id)
+        category.name = data.get("name", category.name)
+        category.description = data.get("description", category.description)
+        category.save()
+        return JsonResponse(
+            {
+                "id": category.id,
+                "name": category.name,
+                "description": category.description,
+            },
+            safe=False,
+            status=200,
+        )
+
+    def delete(self, request: HttpRequest, id: int) -> JsonResponse:
+        category = get_object_or_404(Category, id=id)
+        category.delete()
+        return JsonResponse({"message": "Category deleted"}, status=200)
