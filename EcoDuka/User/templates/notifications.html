@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications</title>
+  </head>
+  <body>
+    <h6>Notifications</h6>
+    <form method="post" action="/notifications/">
+      {%csrf_token%}
+      <input type="content" name="content" id="content" />
+      <label for="content">Content</label>
+      <input type="submit" value="Submit" id="submit" />
+    </form>
+
+    <script>
+      let submit_btn = document.getElementById("submit");
+      submit_btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        let content = document.getElementById("content").value;
+        let csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+
+        (async function () {
+          await fetch("/notifications/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrf,
+            },
+            body: JSON.stringify({ content: content }),
+          });
+        })();
+      });
+    </script>
+  </body>
+</html>
