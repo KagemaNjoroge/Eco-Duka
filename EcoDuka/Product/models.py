@@ -18,6 +18,13 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
+    def to_json(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "id": self.id,
+        }
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -41,3 +48,13 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    def to_json(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "quantity": self.quantity,
+            "category": self.category.name,
+            "merchant": self.merchant.username,
+        }
