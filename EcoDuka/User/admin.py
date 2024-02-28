@@ -20,3 +20,8 @@ class LocationAdmin(admin.ModelAdmin):
 
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ["user", "content", "date", "read"]
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Location, LocationAdmin)
+admin.site.register(Notification, NotificationAdmin)

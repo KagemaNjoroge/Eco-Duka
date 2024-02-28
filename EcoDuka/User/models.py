@@ -11,6 +11,10 @@ class Location(models.Model):
     def __str__(self):
         return self.ward
 
+    class Meta:
+        verbose_name = "Location"
+        verbose_name_plural = "Locations"
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -91,3 +95,7 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.content[:15]
+
+    class Meta:
+        verbose_name = "Notification"
+        verbose_name_plural = "Notifications"
