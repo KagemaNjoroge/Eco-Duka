@@ -1,7 +1,6 @@
-from itertools import product
 import json
 from django.http import HttpRequest, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 
 from django.views import View
 
