@@ -5,22 +5,17 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 
 from .models import Category, Product
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class ProductView(View):
     def get(self, request: HttpRequest, id: int = None) -> JsonResponse:
         if id:
             product = get_object_or_404(Product, id=id)
             return JsonResponse(
-                {
-                    "id": product.id,
-                    "name": product.name,
-                    "description": product.description,
-                    "price": product.price,
-                    "quantity": product.quantity,
-                    "category": product.category.name,
-                    "merchant": product.merchant.username,
-                },
+                product.to_json(),
                 safe=False,
                 status=200,
             )
@@ -28,18 +23,7 @@ class ProductView(View):
             # all products where merchant is the logged in user
             products = Product.objects.filter(merchant=request.user)
             return JsonResponse(
-                [
-                    {
-                        "id": product.id,
-                        "name": product.name,
-                        "description": product.description,
-                        "price": product.price,
-                        "quantity": product.quantity,
-                        "category": product.category.name,
-                        "merchant": product.merchant.username,
-                    }
-                    for product in products
-                ],
+                [product.to_json() for product in products],
                 safe=False,
                 status=200,
             )
@@ -54,25 +38,17 @@ class ProductView(View):
         data = json.loads(data)
         product = get_object_or_404(Product, id=id)
         # update the product with **data
-        product.name = data.get("name", product.name)
-        product.description = data.get("description", product.description)
-        product.price = data.get("price", product.price)
-        product.quantity = data.get("quantity", product.quantity)
-        category = get_object_or_404(Category, id=data.get("category"))
+        product.name = data["name"]
+        product.description = data["description"]
+        product.price = data["price"]
+        product.quantity = data["quantity"]
+        category = get_object_or_404(Category, id=data["category"])
         merchant = request.user
         product.merchant = merchant
         product.category = category
         product.save()
         return JsonResponse(
-            {
-                "id": product.id,
-                "name": product.name,
-                "description": product.description,
-                "price": product.price,
-                "quantity": product.quantity,
-                "category": product.category.name,
-                "merchant": product.merchant.username,
-            },
+            product.to_json(),
             safe=False,
             status=200,
         )
@@ -85,44 +61,26 @@ class ProductView(View):
         product = Product(**data, category=category, merchant=merchant)
         product.save()
         return JsonResponse(
-            {
-                "id": product.id,
-                "name": product.name,
-                "description": product.description,
-                "price": product.price,
-                "quantity": product.quantity,
-                "category": product.category.name,
-                "merchant": product.merchant.username,
-            },
+            product.to_json(),
             safe=False,
             status=201,
         )
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class CategoryView(View):
     def get(self, request: HttpRequest, id: int = None) -> JsonResponse:
         if id:
             category = get_object_or_404(Category, id=id)
             return JsonResponse(
-                {
-                    "id": category.id,
-                    "name": category.name,
-                    "description": category.description,
-                },
+                category.to_json(),
                 safe=False,
                 status=200,
             )
         else:
             categories = Category.objects.all()
             return JsonResponse(
-                [
-                    {
-                        "id": category.id,
-                        "name": category.name,
-                        "description": category.description,
-                    }
-                    for category in categories
-                ],
+                [category.to_json() for category in categories],
                 safe=False,
                 status=200,
             )
@@ -133,11 +91,7 @@ class CategoryView(View):
         category = Category(**data)
         category.save()
         return JsonResponse(
-            {
-                "id": category.id,
-                "name": category.name,
-                "description": category.description,
-            },
+            category.to_json(),
             safe=False,
             status=201,
         )
@@ -150,11 +104,7 @@ class CategoryView(View):
         category.description = data.get("description", category.description)
         category.save()
         return JsonResponse(
-            {
-                "id": category.id,
-                "name": category.name,
-                "description": category.description,
-            },
+            category.to_json(),
             safe=False,
             status=200,
         )
