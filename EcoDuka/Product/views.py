@@ -5,10 +5,9 @@ from django.shortcuts import get_object_or_404, render
 
 from django.views import View
 
-from EcoDuka.Product.models import Category, Product
+from .models import Category, Product
 
 
-# Create your views here.
 class ProductView(View):
     def get(self, request: HttpRequest, id: int = None) -> JsonResponse:
         if id:
