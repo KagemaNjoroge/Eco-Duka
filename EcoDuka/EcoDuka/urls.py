@@ -6,4 +6,5 @@ urlpatterns = [
     path("user/", include("User.urls")),
     path("", include("User.urls")),
     path("", include("Product.urls")),
+    path("", include("Payment.urls")),
 ]
