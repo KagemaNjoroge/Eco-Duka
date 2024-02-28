@@ -23,6 +23,15 @@ class Sale(models.Model):
         verbose_name = "Sale"
         verbose_name_plural = "Sales"
 
+    def to_json(self):
+        return {
+            "product": self.product,
+            "merchant": self.merchant,
+            "customer": self.customer,
+            "date": self.date,
+            "amount": self.amount,
+        }
+
 
 class PaymentPlan(models.Model):
     period = models.DurationField()
@@ -61,3 +70,10 @@ class Payment(models.Model):
     class Meta:
         verbose_name = "Payment"
         verbose_name_plural = "Payments"
+
+    def to_json(self):
+        return {
+            "user": self.user.username,
+            "amount": self.amount,
+            "date": self.date,
+        }
