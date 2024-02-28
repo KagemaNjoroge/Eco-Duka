@@ -14,6 +14,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -33,3 +37,7 @@ class Product(models.Model):
             raise MyException("Only merchant can own product")
         else:
             super(Product, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
