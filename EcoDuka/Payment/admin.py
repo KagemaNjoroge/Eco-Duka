@@ -15,7 +15,7 @@ class TrackerAdmin(admin.ModelAdmin):
 
 
 class SaleAdmin(admin.ModelAdmin):
-    list_display = ["product", "merchant", "customer", "date", "amount"]
+    list_display = ["merchant", "customer", "date", "amount"]
 
 
 admin.site.register(Payment, PaymentAdmin)
