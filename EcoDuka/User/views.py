@@ -1,14 +1,26 @@
 import json
 from django.shortcuts import get_object_or_404, render
 from django.views import View
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, HttpResponse
 from .models import CustomUser, Location, Notification
+from Product.models import Product, Category
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 
 def render_notifications(request):
-    return render(request, "notifications.html")
+    return render(request, "index.html")
+
+
+def store(request: HttpRequest) -> HttpResponse:
+    # all products
+    products = Product.objects.all()
+    # all categories
+    categories = Category.objects.all()
+
+    return render(
+        request, "store.html", {"products": products, "categories": categories}
+    )
 
 
 @method_decorator(csrf_exempt, name="dispatch")
