@@ -8,8 +8,12 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 
-def render_notifications(request):
+def home(request):
     return render(request, "index.html")
+
+
+def contacts(request):
+    return render(request, "contacts.html")
 
 
 def store(request: HttpRequest) -> HttpResponse:
