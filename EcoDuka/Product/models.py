@@ -40,7 +40,6 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if self.merchant.user_type != "MERCHANT":
-            print(self.merchant.user_type)
             raise MyException("Only merchant can own product")
         else:
             super(Product, self).save(*args, **kwargs)
@@ -53,8 +52,9 @@ class Product(models.Model):
         return {
             "name": self.name,
             "description": self.description,
+            "image": self.image.url,
             "price": self.price,
             "quantity": self.quantity,
             "category": self.category.name,
-            "merchant": self.merchant.username,
+            "merchant": self.merchant.to_json(),
         }
