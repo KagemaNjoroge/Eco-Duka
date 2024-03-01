@@ -1,25 +1,21 @@
+{% load  static %}
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - E-STORE</title>
+    <title>Home - EcoDuka</title>
     <meta name="description" content="Empowering rural Kenya with clean energy. Shop solar panels, electric bikes, and more. Flexible payment options available. Join the clean energy revolution today!">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
-    <link rel="stylesheet" href="assets/css/Roboto.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
-    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="assets/css/button-materialize-materialize.min.css">
-    <link rel="stylesheet" href="assets/css/button-materialize.css">
-    <link rel="stylesheet" href="assets/css/featured-products-slider-Featured-products-slider-1.css">
-    <link rel="stylesheet" href="assets/css/featured-products-slider-Featured-products-slider.css">
-    <link rel="stylesheet" href="assets/css/Latest-Events.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Basic-icons.css">
-    <link rel="stylesheet" href="assets/css/Shopping-Grid.css">
+    <link rel="stylesheet" href="{% static 'css/Roboto.css"' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}' %}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+
 </head>
 
 <body>
@@ -86,9 +82,9 @@
                 </div>
                 <div class="col-12 col-lg-10 mx-auto">
                     <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
-                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="assets/img/products/solar-water-pump.jpg"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="assets/img/products/Solar-water-heater.jpg" style="margin-top: 10px;"></div>
-                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="assets/img/products/solar-home-back-system.jpg"></div>
-                        <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="assets/img/products/Solar-street-lights.jpg" width="466" height="311" style="padding-right: 0px;margin-left: 80px;"></div>
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="{% static 'img/products/solar-water-pump.jpg' %}"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="{% static 'img/products/Solar-water-heater.jpg' %}" style="margin-top: 10px;"></div>
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="{% static 'img/products/solar-home-back-system.jpg' %}"></div>
+                        <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="{% static 'img/products/Solar-street-lights.jpg' %}" width="466" height="311" style="padding-right: 0px;margin-left: 80px;"></div>
                     </div>
                 </div>
             </div>
@@ -222,7 +218,7 @@
           <a href="#"
             ><img
               class="card-img-top"
-              src="assets/img/products/solar-home-back-system.jpg"
+              src="{% static 'img/products/solar-home-back-system.jpg' %}"
               alt="wrappixel kit"
               height="200px"
               width="200px"
@@ -242,7 +238,7 @@
           <a href="#"
             ><img
               class="card-img-top"
-              src="assets/img/products/Solar-water-heater.jpg"
+              src="{% static 'img/products/Solar-water-heater.jpg' %}"
               alt="wrappixel kit"
               height="200px"
               width="200px"
@@ -262,7 +258,7 @@
           <a href="#"
             ><img
               class="card-img-top"
-              src="assets/img/products/solar-water-pump.jpg"
+              src="{% static 'img/products/solar-water-pump.jpg' %}"
               alt="wrappixel kit"
               height="200px"
               width="200px"
@@ -292,7 +288,7 @@
                 <div class="col mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="bg-dark border rounded border-dark p-4">EcoDuka is a game-changer for our community! With their range of solar-powered products and inclusive financing options, more families in our village can now access clean energy. I bought a solar lamp for my grandmother, and it has made a world of difference in her life. Thank you, EcoDuka, for empowering us to embrace sustainability!</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man in red blue and white plaid dress shirt wearing yellow hat holding black smartphone" width="50" height="50" src="assets/img/photo-1621905253185-95614217f357.jpg">
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man in red blue and white plaid dress shirt wearing yellow hat holding black smartphone" width="50" height="50" src="{% static 'img/photo-1621905253185-95614217f357.jpg' %}">
                             <div>
                                 <p class="fw-bold text-primary mb-0">John Onyaa</p>
                                 <p class="text-muted mb-0">Kakamega, Kenya</p>
@@ -303,7 +299,7 @@
                 <div class="col mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="bg-dark border rounded border-dark p-4">EcoDuka changed my life! As a single mother living in rural Kenya, I never thought I could afford solar power. But thanks to EcoDuka's flexible payment plans, I now have a solar lamp to light up my home. My children can study at night, and I no longer worry about high energy bills. Asante sana, EcoDuka!</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="women's blue and pink floral scoop-neck top" width="50" height="50" src="assets/img/photo-1534470717-233b39a41c54.jpg">
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="women's blue and pink floral scoop-neck top" width="50" height="50" src="{% static 'img/photo-1534470717-233b39a41c54.jpg' %}">
                             <div>
                                 <p class="fw-bold text-primary mb-0">Susan Wambui</p>
                                 <p class="text-muted mb-0">Nyeri, Kenya</p>
@@ -314,7 +310,7 @@
                 <div class="col mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="bg-dark border rounded border-dark p-4">I recently purchased a solar panel from EcoDuka, and I couldn't be happier with my decision. The product quality is excellent, and the payment process was smooth and hassle-free. Now I can generate my own clean energy and reduce my carbon footprint. I highly recommend EcoDuka to anyone looking for affordable renewable energy solutions.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man wearing red thawb robe holding cane" width="50" height="50" src="assets/img/photo-1534868106572-5307385af17d.jpg">
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man wearing red thawb robe holding cane" width="50" height="50" src="{% static 'img/photo-1534868106572-5307385af17d.jpg' %}">
                             <div>
                                 <p class="fw-bold text-primary mb-0">Yusuf Ali Abdalla</p>
                                 <p class="text-muted mb-0">Wajir, Kenya</p>
@@ -440,12 +436,11 @@
             </div>
         </div>
     </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/bold-and-dark.js"></script>
-    <script src="assets/js/button-materialize-materialize.min.js"></script>
-    <script src="assets/js/featured-products-slider-Featured-products-slider.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bs-init.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+
 </body>
 
 </html>
