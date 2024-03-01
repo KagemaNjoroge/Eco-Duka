@@ -57,4 +57,5 @@ class Product(models.Model):
             "quantity": self.quantity,
             "category": self.category.name,
             "merchant": self.merchant.to_json(),
+            "id": self.id,
         }
