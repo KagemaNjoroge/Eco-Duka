@@ -1,7 +1,13 @@
 from django.urls import path
 
 
-from .views import LocationView, UserView, NotificationsView, render_notifications
+from .views import (
+    LocationView,
+    UserView,
+    NotificationsView,
+    render_notifications,
+    store,
+)
 
 urlpatterns = [
     path("location/", LocationView.as_view(), name="location"),
@@ -11,4 +17,5 @@ urlpatterns = [
     path("notifications/", NotificationsView.as_view(), name="notifications"),
     path("notifications/<int:id>/", NotificationsView.as_view(), name="notification"),
     path("render_notifications/", render_notifications, name="render_notifications"),
+    path("store/", store, name="store"),
 ]
