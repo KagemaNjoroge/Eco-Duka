@@ -47,8 +47,8 @@
             class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
+              width="5em"
+              height="3em"
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
@@ -343,7 +343,13 @@
         for (var i = 0; i < products.length; i++) {
           total += products[i].quantity;
         }
-        $("#cart_num").html(total);
+        if (total == 0) {
+          $("#cart_num").html("");
+        }
+        else {
+          $("#cart_num").html(total);
+        }
+      
       }
 
       // product details side bar
@@ -532,6 +538,7 @@
             for (var i = 0; i < products.length; i++) {
               var product = products[i];
               // product row with a product card
+              
               html += `
                 <div class="col-md-6 col-lg-4">
                   <div
