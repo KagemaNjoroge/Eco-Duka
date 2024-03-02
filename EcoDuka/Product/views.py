@@ -113,3 +113,17 @@ class CategoryView(View):
         category = get_object_or_404(Category, id=id)
         category.delete()
         return JsonResponse({"message": "Category deleted"}, status=200)
+
+
+def search(request: HttpRequest) -> JsonResponse:
+    query = request.GET.get(key="search")
+    if query:
+        products = Product.objects.filter(name__icontains=query)
+        products = [product.to_json() for product in products]
+        return JsonResponse({"products": products}, safe=True, status=200)
+    else:
+        return JsonResponse(
+            {"products": []},
+            safe=True,
+            status=200,
+        )

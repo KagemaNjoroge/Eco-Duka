@@ -1,7 +1,15 @@
 from django.urls import path
 
 
-from .views import LocationView, UserView, NotificationsView, render_notifications
+from .views import (
+    LocationView,
+    UserView,
+    NotificationsView,
+    home,
+    contacts,
+    store,
+    loginuser as login,
+)
 
 urlpatterns = [
     path("location/", LocationView.as_view(), name="location"),
@@ -10,5 +18,8 @@ urlpatterns = [
     path("user/<int:id>/", UserView.as_view(), name="user"),
     path("notifications/", NotificationsView.as_view(), name="notifications"),
     path("notifications/<int:id>/", NotificationsView.as_view(), name="notification"),
-    path("render_notifications/", render_notifications, name="render_notifications"),
+    path("", home, name="home"),
+    path("store/", store, name="store"),
+    path("contacts/", contacts, name="contacts"),
+    path("login/", login, name="login"),
 ]

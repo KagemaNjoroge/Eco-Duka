@@ -99,7 +99,7 @@ class CustomUser(AbstractBaseUser):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "phone_number": self.phone_number,
-            "profile_photo": self.profile_photo,
+            "profile_photo": self.profile_photo.url if self.profile_photo else None,
             "national_id": self.national_id,
             "user_type": self.user_type,
             "location": self.location.to_json(),

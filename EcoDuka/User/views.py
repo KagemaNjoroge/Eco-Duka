@@ -1,14 +1,52 @@
 import json
-from django.shortcuts import get_object_or_404, render
+import re
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, HttpResponse
 from .models import CustomUser, Location, Notification
+from Product.models import Product, Category
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 
 
-def render_notifications(request):
-    return render(request, "notifications.html")
+def is_ajax(request: HttpRequest) -> bool:
+    return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
+
+
+def home(request):
+
+    return render(request, "index.html")
+
+
+def contacts(request):
+    return render(request, "contacts.html")
+
+
+def loginuser(request: HttpRequest) -> HttpResponse:
+    if request.user.is_authenticated:
+        return redirect("store")
+    if request.method == "POST":
+        password = request.POST.get("password")
+        email = request.POST.get("email")
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("store")
+        else:
+            return redirect("home")
+
+
+def store(request: HttpRequest) -> HttpResponse:
+    # all products
+    products = Product.objects.all()
+    # all categories
+    categories = Category.objects.all()
+
+    return render(
+        request, "store.html", {"products": products, "categories": categories}
+    )
 
 
 @method_decorator(csrf_exempt, name="dispatch")
