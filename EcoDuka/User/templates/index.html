@@ -23,10 +23,7 @@
       href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap"
     />
 
-    <link
-      rel="stylesheet"
-      href="{% static 'fonts/font-awesome.min.css' %}' %}"
-    />
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}" />
@@ -86,14 +83,20 @@
               <a class="nav-link" href="{%url 'contacts'%}">Contacts</a>
             </li>
           </ul>
-          <button
-            class="btn btn-primary shadow"
-            type="button"
-            data-bs-target="#modal-1"
-            data-bs-toggle="modal"
-          >
-            Sign up
-          </button>
+          <!-- Only show when user is not logged  in-->
+          {%if not user.is_authenticated%}
+          <div class="d-flex align-items-center">
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#modal-1"
+            >
+              Login
+            </button>
+            <a class="btn btn-primary ms-3" href="">Register</a>
+          </div>
+          {%endif%}
         </div>
       </div>
     </nav>
@@ -176,15 +179,19 @@
                           </div>
                           <form
                             class="text-center"
+                            id="login_form"
                             method="post"
                             style="padding-bottom: 0px"
+                            action="{%url 'login'%}"
                           >
+                            {%csrf_token%}
                             <div class="mb-3">
                               <input
                                 class="form-control"
                                 type="email"
                                 name="email"
                                 placeholder="Email"
+                                id="email"
                               />
                             </div>
                             <div class="mb-3">
@@ -193,10 +200,12 @@
                                 type="password"
                                 name="password"
                                 placeholder="Password"
+                                id="password"
                               />
                             </div>
                             <div class="mb-3">
                               <button
+                                id="login-btn"
                                 class="btn btn-primary d-block w-100"
                                 type="submit"
                               >
@@ -1094,5 +1103,41 @@
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bs-init.js' %}"></script>
     <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script>
+      let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+      console.log(csrftoken);
+
+      // login
+      // $("#login_btn").click(function () {
+      //   var email = $("#email").val();
+      //   var password = $("#password").val();
+
+      //   // log csrftoken
+      //   console.log(csrftoken);
+
+      //   $.ajax({
+      //     url: "/login/",
+      //     type: "POST",
+      //     headers: { "X-CSRFToken": csrftoken },
+      //     data: {
+      //       email: email,
+      //       password: password,
+      //       // csrf
+      //     },
+      //     success: function (response) {
+      //       if (response.status == "success") {
+      //         window.location.href = "/";
+      //         // hide login button
+      //         $("#login_btn").hide();
+      //       } else if (response.status == "failed") {
+      //         alert("Invalid login credentials");
+      //       } else if (response.status == "Already logged in") {
+      //         window.location.href = "/";
+      //         $("#login_btn").hide();
+      //       }
+      //     },
+      //   });
+      // });
+    </script>
   </body>
 </html>
