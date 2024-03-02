@@ -8,6 +8,7 @@ from .views import (
     home,
     contacts,
     store,
+    loginuser as login,
 )
 
 urlpatterns = [
@@ -20,4 +21,5 @@ urlpatterns = [
     path("", home, name="home"),
     path("store/", store, name="store"),
     path("contacts/", contacts, name="contacts"),
+    path("login/", login, name="login"),
 ]
